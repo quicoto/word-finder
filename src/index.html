@@ -13,8 +13,8 @@
       <nav class="navbar d-block d-sm-flex text-center text-sm-start">
         <h1 class="mb-4 mb-sm-0 pt-0">🕵️‍♂️ Word Finder</h1>
         <div>
-          <button type="button" class="btn btn-outline-success">English</button>
-          <button type="button" class="btn btn-outline-secondary">Català</button>
+          <a href="./?lang=en" id="button-english" class="btn btn-outline-secondary">English</a>
+          <a href="./?lang=ca" id="button-catala" class="btn btn-outline-secondary">Català</a>
         </div>
       </nav>
     </header>
@@ -23,7 +23,9 @@
       <form>
         <div id="rows" class="mb-4"></div>
         <div id="actions" class="d-grid gap-2">
+          <span id="solution" class="text-uppercase text-center border bg-danger p-2 mb-2" hidden></span>
           <button type="submit" class="btn btn-primary" id="submit" title="Validate">🤞</button>
+          <button type="button" class="btn btn-primary" id="reload" title="Another word" hidden>Another word?</button>
         </div>
       </form>
     </section>
