@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Finder</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="bg-dark text-light">
+  <main class="container">
+    <header class="py-3 mb-4 border-bottom">
+      <nav class="navbar d-block d-sm-flex text-center text-sm-start">
+        <h1 class="mb-4 mb-sm-0 pt-0">🕵️‍♂️ Word Finder</h1>
+        <div>
+          <button type="button" class="btn btn-outline-success">English</button>
+          <button type="button" class="btn btn-outline-secondary">Català</button>
+        </div>
+      </nav>
+    </header>
+
+    <section id="game">
+      <form>
+        <div id="rows" class="mb-4"></div>
+        <div id="actions" class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary" id="submit" title="Validate">🤞</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Fireworks -->
+    <div class="fireworks-wrapper" id="fireworks_wrapper">
+      <div class="fireworks">
+        <div class="before"></div>
+        <div class="after"></div>
+      </div>
+    </div>
+
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-12 text-center">
+        <small class="text-light">With ❤️ from <a class="text-light" href="https://ricard.blog/" title="Ricard Torres Blog">Ricard Torres</a></small>
+      </div>
+    </footer>
+  </main>
+
+  <script defer src="./js/main.js"></script>
+</body>
+</html>

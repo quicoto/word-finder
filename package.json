@@ -1,0 +1,29 @@
+{
+  "name": "word-finder",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm-run-all -s lint:* -p build:* -s minify:*",
+    "build:js": "esbuild ./src/js/main.js --bundle --minify --outfile=./dist/js/main.js",
+    "lint:js": "eslint ./src/js/*.js",
+    "copy:css": "cpy ./src/css/bootstrap.min.css ./dist/css",
+    "minify:css": "purgecss --config ./purgecss.config.js",
+    "minify:html": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true --output ./dist/index.html ./src/index.html",
+    "watch": "npm-run-all -p build:js"
+  },
+  "author": "Ricard Torres",
+  "license": "MIT",
+  "dependencies": {
+    "cpy-cli": "^3.1.1",
+    "esbuild": "^0.14.9",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "html-minifier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "purgecss": "^4.1.3"
+  }
+}
