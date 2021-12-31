@@ -5,6 +5,8 @@ import * as utils from './utils';
 
 const _$ = {};
 const _ = {
+  database: [], // Store the language words
+  language: 'english',
   data: [
     {
       letters: [
@@ -18,7 +20,6 @@ const _ = {
     },
   ],
 };
-const solution = 'troll'.split('');
 
 function _setElements() {
   _$.rows = document.getElementById('rows');
@@ -70,7 +71,7 @@ function _onSubmit(DOMEvent) {
   utils.enableNextRow(+$currentRow.dataset.row + 1);
 
   // Store the results
-  const results = utils.calculate(solution, wordToValidate);
+  const results = utils.calculate(_.solution, wordToValidate);
   _.data[+$currentRow.dataset.row] = results;
   utils.processResults(_.data);
   _checkIfRoundIsDone(results);
@@ -114,11 +115,18 @@ function _init() {
   _setElements();
   _addEventListeners();
 
-  _$.rows.innerHTML = templates.game({
-    initialValue: _.data,
-  });
-
-  _fireworks();
+  fetch(`./database/${_.language}.json?${new Date().getTime()}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const random = Math.floor(Math.random() * (data.words.length + 1));
+      _.database = data.words;
+      _.solution = data.words[random].split('');
+      // eslint-disable-next-line no-console
+      console.log(_.solution);
+      _$.rows.innerHTML = templates.game({
+        initialValue: _.data,
+      });
+    });
 }
 
 _init();

@@ -12198,19 +12198,20 @@ fieldset:disabled .btn {
 
 /* Fireworks CSS */
 .fireworks-wrapper {
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
   position: absolute;
   top: 10%;
-  left: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 .pyro > .before,
 .pyro > .after {
+  border-radius: 50%;
+  height: 5px;
   position: absolute;
   width: 5px;
-  height: 5px;
-  border-radius: 50%;
   box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
     0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,
     0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff,

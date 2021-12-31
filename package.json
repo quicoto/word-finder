@@ -5,15 +5,17 @@
   "scripts": {
     "build": "npm-run-all -s lint:* -p build:* -s minify:*",
     "build:js": "esbuild ./src/js/main.js --bundle --minify --outfile=./dist/js/main.js",
+    "build:css": "cpy ./src/css/styles.css ./dist/css",
+    "build:database": "cpy ./database/*.json ./dist/database",
     "lint:js": "eslint ./src/js/*.js",
-    "copy:css": "cpy ./src/css/bootstrap.min.css ./dist/css",
-    "minify:css": "purgecss --config ./purgecss.config.js",
+    "minify:css": "purgecss --config ./purgecss.config.js && cleancss -o ./dist/css/styles.css ./dist/css/styles.css",
     "minify:html": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true --output ./dist/index.html ./src/index.html",
     "watch": "npm-run-all -p build:js"
   },
   "author": "Ricard Torres",
   "license": "MIT",
   "dependencies": {
+    "clean-css-cli": "^5.5.0",
     "cpy-cli": "^3.1.1",
     "esbuild": "^0.14.9",
     "eslint": "^8.5.0",
