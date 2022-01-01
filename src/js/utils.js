@@ -17,6 +17,8 @@ export function enableNextRow(row) {
 }
 
 export function disableRow($row) {
+  if (!$row) return;
+
   const $inputs = $row.querySelectorAll(SELECTORS.letterInput);
 
   $inputs.forEach(($input) => {

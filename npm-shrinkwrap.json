@@ -1,12 +1,12 @@
 {
   "name": "word-finder",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "word-finder",
-      "version": "1.1.3",
+      "version": "1.1.4",
       "license": "MIT",
       "dependencies": {
         "clean-css-cli": "^5.5.0",
