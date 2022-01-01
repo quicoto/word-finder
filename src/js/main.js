@@ -2,6 +2,7 @@ import { CLASSES } from './CLASSES';
 import { SELECTORS } from './SELECTORS';
 import * as templates from './templates';
 import * as utils from './utils';
+import * as utilities from './utilities';
 
 const _$ = {};
 const initialData = [
@@ -28,9 +29,14 @@ function _getLanguage() {
 }
 
 const _ = {
+  projectKey: 'word-finder',
   database: [], // Store the language words
   language: _getLanguage(),
   data: initialData,
+  sortedData: {
+    english: [],
+    catala: [],
+  }, // from LocalStorage
 };
 
 function _setElements() {
@@ -39,6 +45,8 @@ function _setElements() {
   _$.submitButton = document.getElementById('submit');
   _$.reloadButton = document.getElementById('reload');
   _$.solution = document.getElementById('solution');
+  _$.playedWords = document.getElementById('played-words');
+  _$.wordCount = document.getElementById('word-count');
 }
 
 function _fireworks() {
@@ -48,6 +56,30 @@ function _fireworks() {
   setTimeout(() => {
     fireworksWrapper.querySelector('.fireworks').classList.remove('pyro');
   }, 10000);
+}
+
+function _initStorage() {
+  const localData = localStorage.getItem(_.projectKey);
+
+  if (localData) {
+    _.sortedData = JSON.parse(localData);
+    _.sortedData.english = _.sortedData.english.sort();
+    _.sortedData.catala = _.sortedData.catala.sort();
+
+    _$.playedWords.innerText = _.sortedData[_.language].join(', ');
+    _$.wordCount.innerText = `(${_.sortedData[_.language].length} / ${_.database.length})`;
+  } else {
+    localStorage.setItem(_.projectKey, JSON.stringify(_.sortedData));
+
+    _initStorage();
+  }
+}
+
+function _storeWord() {
+  _.sortedData[_.language].push(_.solution.join(''));
+  localStorage.setItem(_.projectKey, JSON.stringify(_.sortedData));
+
+  _initStorage();
 }
 
 function _checkIfRoundIsSolved(results) {
@@ -60,6 +92,7 @@ function _checkIfRoundIsSolved(results) {
     _$.reloadButton.hidden = false;
     utils.disableRow($currentRow);
     _fireworks();
+    _storeWord();
   }
 
   return isDone;
@@ -98,13 +131,14 @@ function _onSubmit(DOMEvent) {
   }
 
   // Store the results
-  const results = utils.calculate(_.solution, wordToValidate);
+  const results = utilities.calculate(_.solution, wordToValidate);
   _.data[+$currentRow.dataset.row] = results;
   utils.processResults(_.data);
   const isSolved = _checkIfRoundIsSolved(results);
 
   if (!isSolved && nextRow === 6) {
     _showSolution();
+    _storeWord();
   }
 }
 
@@ -159,7 +193,12 @@ function _addEventListeners() {
 
 function _freshStart() {
   _addEventListeners();
+
   _.solution = _randomWord();
+
+  while (_.sortedData[_.language].indexOf(_.solution.join('')) > -1) {
+    _.solution = _randomWord();
+  }
   _.data = initialData;
   _$.rows.innerHTML = templates.game({
     initialValue: _.data,
@@ -181,6 +220,7 @@ function _init() {
     .then((response) => response.json())
     .then((data) => {
       _.database = data.words;
+      _initStorage();
       _freshStart();
     });
 }

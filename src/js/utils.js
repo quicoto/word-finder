@@ -27,29 +27,6 @@ export function disableRow($row) {
   $row.classList.add(CLASSES.wordDisabled);
 }
 
-export function calculate(solution, input) {
-  const result = [];
-
-  input.split('').forEach((letter, index) => {
-    let status = -1;
-
-    if (solution.indexOf(letter.toLowerCase()) > -1) {
-      if (solution[index] === letter) {
-        status = 2;
-      } else {
-        status = 1;
-      }
-    }
-
-    result.push({
-      letter,
-      status,
-    });
-  });
-
-  return result;
-}
-
 export function processResults(data) {
   data.forEach((row, i) => {
     row.forEach((input, j) => {
