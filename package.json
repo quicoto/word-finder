@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "npm-run-all -s lint:* -p build:* -s minify:*",
-    "build:js": "esbuild ./src/js/main.js --bundle --outfile=./dist/js/main.js",
+    "build:js": "esbuild ./src/js/main.js --bundle --minify --outfile=./dist/js/main.js",
     "build:css": "cpy ./src/css/styles.css ./dist/css",
     "build:database": "cpy ./database/*.json ./dist/database",
     "lint:js": "eslint ./src/js/*.js",

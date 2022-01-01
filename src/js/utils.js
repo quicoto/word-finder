@@ -33,7 +33,7 @@ export function calculate(solution, input) {
   input.split('').forEach((letter, index) => {
     let status = -1;
 
-    if (solution.indexOf(letter) > -1) {
+    if (solution.indexOf(letter.toLowerCase()) > -1) {
       if (solution[index] === letter) {
         status = 2;
       } else {

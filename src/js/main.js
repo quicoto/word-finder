@@ -110,9 +110,9 @@ function _onSubmit(DOMEvent) {
 
 function _onKeyUp(DOMEvent) {
   const { target } = DOMEvent;
+  const { value, name } = target;
 
-  if (target.classList.contains(CLASSES.letterInput)) {
-    const { value, name } = target;
+  if (value !== '' && target.classList.contains(CLASSES.letterInput)) {
     const regex = /[a-zA-Z]/g;
     const found = value.match(regex);
     const letterPosition = +name.split('-')[1];
