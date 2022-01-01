@@ -138,7 +138,6 @@ function _onSubmit(DOMEvent) {
 
   if (!isSolved && nextRow === 6) {
     _showSolution();
-    _storeWord();
   }
 }
 
