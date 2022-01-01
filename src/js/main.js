@@ -19,11 +19,12 @@ const initialData = [
 ];
 
 function _getLanguage() {
-  let language = 'english';
+  let language = 'catala';
   const urlSearchParams = new URLSearchParams(window.location.search);
   const params = Object.fromEntries(urlSearchParams.entries());
 
   if (params.lang === 'ca') language = 'catala';
+  if (params.lang === 'en') language = 'english';
 
   return language;
 }
