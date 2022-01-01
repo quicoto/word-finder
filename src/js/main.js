@@ -175,7 +175,7 @@ function _onReload() {
 }
 
 function _randomWord() {
-  const randomNumber = Math.floor(Math.random() * (_.database.length + 1));
+  const randomNumber = Math.floor(Math.random() * (_.database.length));
   const word = _.database[randomNumber].split('');
 
   // eslint-disable-next-line no-console
@@ -194,6 +194,13 @@ function _freshStart() {
   _addEventListeners();
 
   _.solution = _randomWord();
+
+  if (_.sortedData[_.language].length === _.database.length) {
+    _$.rows.innerHTML = '🎉 Congratulations, you have completed all words! 👏';
+    _$.submitButton.hidden = true;
+
+    return;
+  }
 
   while (_.sortedData[_.language].indexOf(_.solution.join('')) > -1) {
     _.solution = _randomWord();
