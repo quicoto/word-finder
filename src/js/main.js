@@ -48,6 +48,9 @@ function _setElements() {
   _$.solution = document.getElementById('solution');
   _$.playedWords = document.getElementById('played-words');
   _$.wordCount = document.getElementById('word-count');
+  _$.modalBackdrop = document.getElementById('modal-backdrop');
+  _$.noRealWordModal = document.getElementById('noRealWordModal');
+  _$.closeModal = document.getElementById('close-modal');
 }
 
 function _fireworks() {
@@ -57,6 +60,22 @@ function _fireworks() {
   setTimeout(() => {
     fireworksWrapper.querySelector('.fireworks').classList.remove('pyro');
   }, 10000);
+}
+
+function _showNoRealWordModal() {
+  document.body.classList.add('modal-open');
+  _$.modalBackdrop.classList.add('show');
+  _$.modalBackdrop.style.display = 'block';
+  _$.noRealWordModal.classList.add('show');
+  _$.noRealWordModal.style.display = 'block';
+}
+
+function _hideNoRealWordModal() {
+  document.body.classList.remove('modal-open');
+  _$.modalBackdrop.classList.remove('show');
+  _$.modalBackdrop.style.display = 'none';
+  _$.noRealWordModal.classList.add('show');
+  _$.noRealWordModal.style.display = 'none';
 }
 
 function _initStorage() {
@@ -122,6 +141,16 @@ function _onSubmit(DOMEvent) {
   $inputs.forEach(($input) => {
     wordToValidate += $input.value;
   });
+
+  // Does the word exist?
+  const isRealWord = _.database.filter((i) => i === wordToValidate);
+
+  if (isRealWord.length === 0) {
+    _showNoRealWordModal();
+
+    // eslint-disable-next-line consistent-return
+    return false;
+  }
 
   utils.disableRow($currentRow);
 
@@ -189,6 +218,7 @@ function _addEventListeners() {
   _$.form.addEventListener('submit', _onSubmit);
   document.addEventListener('keyup', _onKeyUp);
   _$.reloadButton.addEventListener('click', _onReload);
+  _$.closeModal.addEventListener('click', _hideNoRealWordModal);
 }
 
 function _freshStart() {

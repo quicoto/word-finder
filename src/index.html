@@ -5,9 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word Finder</title>
-  <link rel="stylesheet" href="./css/styles.css?ver=1.1.4">
+  <link rel="stylesheet" href="./css/styles.css?ver=1.2.0">
 </head>
 <body class="bg-dark text-light">
+  <div id="modal-backdrop" class="modal-backdrop fade" style="display: none;"></div>
+  <div class="modal fade" id="noRealWordModal" tabindex="-1" aria-labelledby="exampleModalLiveLabel" >
+    <div class="modal-dialog modal-sm text-dark">
+      <div class="modal-content">
+        <div class="modal-header text-center d-block">
+          <h2 class="modal-title" id="exampleModalLiveLabel">💩 Bummer</h2>
+        </div>
+        <div class="modal-body">
+            <span class="d-inline-block me-1 mb-1">This word is not in my diccionary.</span>
+            <span class="d-inline-block">Try something else! 🍀</span>
+        </div>
+        <div class="modal-footer">
+          <div class="d-grid gap-2 w-100">
+            <button id="close-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <main class="container">
     <header class="py-3 mb-4 border-bottom">
       <nav class="navbar d-block d-sm-flex text-center text-sm-start">
@@ -47,11 +68,11 @@
 
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
       <div class="col-12 text-center">
-        <small class="text-light">v1.1.4 with ❤️ from <a class="text-light" href="https://ricard.blog/" title="Ricard Torres Blog">Ricard Torres</a></small>
+        <small class="text-light">v1.2.0 with ❤️ from <a class="text-light" href="https://ricard.blog/" title="Ricard Torres Blog">Ricard Torres</a></small>
       </div>
     </footer>
   </main>
 
-  <script defer src="./js/main.js?ver=1.1.4"></script>
+  <script defer src="./js/main.js?ver=1.2.0"></script>
 </body>
 </html>
